@@ -56,10 +56,16 @@ jobs:
           copy /y ..\tesseract-mini-bin.nuspec .
           nuget pack tesseract-mini-bin.nuspec
       
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: tesseract-mini-bin
+          path: metabuild/*.nupkg
+      
       - name: nuget publish
         shell: cmd
         run: |
           cd metabuild
-          nuget source add -name "github" -source "https://nuget.pkg.github.com/dantmnf/index.json" -username dantmnf -password "${{ secrets.GITHUB_TOKEN }}"
-          nuget push *.nupkg -source github
+          rem nuget source add -name "github" -source "https://nuget.pkg.github.com/dantmnf/index.json" -username dantmnf -password "${{ secrets.GITHUB_TOKEN }}"
+          nuget push *.nupkg -source "https://nuget.pkg.github.com/dantmnf/index.json" -apikey "${{ secrets.GITHUB_TOKEN }}" -NonInteractive -Verbosity detailed
           
