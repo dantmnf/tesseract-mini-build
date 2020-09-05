@@ -10,3 +10,6 @@
 [submodule "libpng"]
 	path = libpng
 	url = https://github.com/glennrp/libpng
+[submodule "libtiff"]
+	path = libtiff
+	url = https://gitlab.com/libtiff/libtiff.git
