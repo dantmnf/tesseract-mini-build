@@ -1,0 +1,52 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+jobs:
+  - job: 'build'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - script: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        set tessprefix=%CD%\metabuild\tesseract-x86
+        mkdir metabuild\build-x86
+        pushd metabuild\build-x86
+        call ..\..\build.bat
+      displayName: 'build x86'
+
+    - script: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        set tessprefix=%CD%\metabuild\tesseract-amd64
+        mkdir metabuild\build-amd64
+        pushd metabuild\build-amd64
+        call ..\..\build.bat
+      displayName: 'build x64'
+
+    - script: |
+        cd metabuild
+        mkdir runtimes\win-x64\native
+        mkdir runtimes\win-x86\native
+        xcopy tesseract-amd64\bin runtimes\win-x64\native
+        xcopy tesseract-x86\bin runtimes\win-x86\native
+        copy /y ..\tesseract-mini-bin.nuspec .
+      displayName: 'prepare nuget'
+
+    - task: NuGetCommand@2
+      displayName: 'nuget pack'
+      inputs:
+        command: 'pack'
+        packagesToPack: 'metabuild/tesseract-mini-bin.nuspec'
+        versioningScheme: 'off'
+
+    - task: NuGetCommand@2
+      inputs:
+        command: 'push'
+        packagesToPush: 'metabuild/*.nupkg'
+        nuGetFeedType: 'internal'
+        publishVstsFeed: '7d486647-bea5-4ed3-9fff-077caebed397/c77bdfd4-11bc-4378-bc7e-8eef68b2fe2b'
+      
