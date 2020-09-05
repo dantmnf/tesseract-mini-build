@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>tesseract-mini-bin</id>
+    <version>4.1.1</version>
+    <authors>dantmnf</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <description>minimal tesseract build for bundle with other applications</description>
+    <releaseNotes>built with leptonica 1.80.0, libpng 1.6.37, zlib 1.2.11, libtiff 4.1.0</releaseNotes>
+    <copyright>Tesseract Authors</copyright>
+    <tags>native</tags>
+  </metadata>
+  <files>
+    <!-- Add a readme -->
+    <file src="runtimes/**" target="" />
+  </files>
+</package>
