@@ -60,6 +60,6 @@ jobs:
         shell: cmd
         run: |
           cd metabuild
-          dotnet nuget add source https://nuget.pkg.github.com/dantmnf/index.json -n github -u dantmnf -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-          dotnet nuget push *.nupkg --source github
+          nuget source add -name "github" -source "https://nuget.pkg.github.com/dantmnf/index.json" -username dantmnf -password "${{ secrets.GITHUB_TOKEN }}"
+          nuget push *.nupkg -source github
           
