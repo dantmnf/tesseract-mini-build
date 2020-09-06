@@ -35,7 +35,7 @@ jobs:
         mkdir win-x86\bin
         xcopy tesseract-amd64\bin win-amd64\bin
         xcopy tesseract-x86\bin win-x86\bin
-        copy /y ..\tesseract-mini-bin.nuspec .
+        powershell ..\Add-NuspecRevisionNumber.ps1 ..\tesseract-mini-bin.nuspec.in tesseract-mini-bin.nuspec
       displayName: 'prepare nuget'
 
     - task: NuGetCommand@2
