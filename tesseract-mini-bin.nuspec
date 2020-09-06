@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>tesseract-mini-bin</id>
     <version>4.1.1</version>
@@ -13,6 +13,7 @@
   </metadata>
   <files>
     <!-- Add a readme -->
-    <file src="runtimes/**" target="" />
+    <file src="win-x86/**" target="" />
+    <file src="win-amd64/**" target="" />
   </files>
 </package>

@@ -31,10 +31,10 @@ jobs:
 
     - script: |
         cd metabuild
-        mkdir runtimes\win-x64\native
-        mkdir runtimes\win-x86\native
-        xcopy tesseract-amd64\bin runtimes\win-x64\native
-        xcopy tesseract-x86\bin runtimes\win-x86\native
+        mkdir win-amd64\bin
+        mkdir win-x86\bin
+        xcopy tesseract-amd64\bin win-amd64\bin
+        xcopy tesseract-x86\bin win-x86\bin
         copy /y ..\tesseract-mini-bin.nuspec .
       displayName: 'prepare nuget'
 
