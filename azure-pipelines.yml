@@ -45,9 +45,8 @@ jobs:
         packagesToPack: 'metabuild/tesseract-mini-bin.nuspec'
         versioningScheme: 'off'
       
-    - task: NuGetCommand@2
+    - task: PublishPipelineArtifact@1
       inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        nuGetFeedType: 'internal'
-        publishVstsFeed: '7d486647-bea5-4ed3-9fff-077caebed397/c77bdfd4-11bc-4378-bc7e-8eef68b2fe2b'
+        targetPath: '$(Build.ArtifactStagingDirectory)\'
+        artifact: 'NuGet packages'
+        publishLocation: 'pipeline'
